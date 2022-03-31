@@ -102,21 +102,21 @@ function App() {
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "",
-    SCAN_LINK: "",
+    CONTRACT_ADDRESS: "0x5d2a71162bbfe108584ba211a083139d9a85b752",
+    SCAN_LINK: "https://polygonscan.com/token/0x5d2a71162bbfe108584ba211a083139d9a85b752",
     NETWORK: {
-      NAME: "",
-      SYMBOL: "",
-      ID: 0,
+      NAME: "polygon",
+      SYMBOL: MATIC
+      ID: 137,
     },
-    NFT_NAME: "",
-    SYMBOL: "",
-    MAX_SUPPLY: 1,
-    WEI_COST: 0,
-    DISPLAY_COST: 0,
-    GAS_LIMIT: 0,
-    MARKETPLACE: "",
-    MARKETPLACE_LINK: "",
+    NFT_NAME: "PolyDAO NFT",
+    SYMBOL: "PDAO",
+    MAX_SUPPLY: 4444,
+    WEI_COST: 12000000000000000000,
+    DISPLAY_COST: 12,
+    GAS_LIMIT: 30000000000,
+    MARKETPLACE: "Opensea",
+    MARKETPLACE_LINK: "https://opensea.io/collection/polydao-official",
     SHOW_BACKGROUND: false,
   });
 
@@ -130,7 +130,7 @@ function App() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(mintAmount)
+    .mint(blockchain.account, mintAmount) 
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
